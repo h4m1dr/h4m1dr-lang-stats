@@ -1,0 +1,30 @@
+name: Waka Readme (Lang Stats)
+
+on:
+  schedule:
+    # مثلا هر روز ساعت ۱۸:۳۰ UTC
+    - cron: '30 18 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    name: Update WakaTime metrics in README
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Update README with WakaTime stats
+        uses: anmol098/waka-readme-stats@master
+        with:
+          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          COMMIT_BY_ME: "True"
+          COMMIT_MESSAGE: "chore: update WakaTime stats"
+          # می‌تونی فلگ‌ها رو مثل قبل تنظیم کنی:
+          # SHOW_PROFILE_VIEWS: "False"
+          # SHOW_LOC_CHART: "False"
+          # SHOW_TIMEZONE: "False"
