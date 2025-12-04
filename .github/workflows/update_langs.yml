@@ -5,13 +5,15 @@ on:
     - cron: "0 0 * * *"   # Every day at 00:00 UTC
   workflow_dispatch:      # Allow manual trigger from Actions tab
 
+permissions:
+  contents: write
+
 jobs:
   build-langs-card:
     runs-on: ubuntu-latest
 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # GitHub automatically provides this token; no need to create manually.
 
     steps:
       - name: Checkout repository
